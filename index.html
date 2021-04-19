@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <title>JavaScript </title>
+    <title>Document</title>
+    <script>
+        //Definiendo un arreglo en Javascript
+        var arreglo = new Array();
+        arreglo[0] = "errorNombre";
+        arreglo[1] = "errorEmail";
+        arreglo[2] = "errorPassword";
+        arreglo[3] = "errorConfirmar";
+
+        //Definiendo la función validar()
+
+        function validar()
+        {
+            var entrada = new Array();
+            entrada[0] = document.getElementById('nombre').value;
+            entrada[1] = document.getElementById('email').value;
+            entrada[2] = document.getElementById('password').value;
+            entrada[3] = document.getElementById('confirmarpassword').value;
+
+            var error = new Array();
+            error[0] = "<span style='color:red'>Ingrese el nombre!!</span>";
+            error[1] = "<span style='color:red'>Ingrese el email!!</span>";
+            error[2] = "<span style='color:red'>Ingrese el password!!</span>";
+            error[3] = "<span style='color:red'>Ingrese la confirmación del password!!</span>";
+
+            //Definiendo un ciclo foreach Javascrit para la validación
+            for(i in entrada){
+                var mensajeError = error[i];
+                var valorArreglo = arreglo[i];
+
+                if(entrada[i]==""){
+                    document.getElementById(valorArreglo).innerHTML = mensajeError;
+                }
+
+                //validación del correo
+                else if(i==1){
+                    var arroba = entrada[i].indexOf("@");
+                    var punto = entrada[i].lastIndexOf(".");
+                
+
+                if(arroba<1 || punto<arroba+2 || entrada[1].length<punto+2){
+                    document.getElementById('errorEmail').innerHTML = 
+                    "<span style='color:red'>Ingrese un email válido</span>";
+                }
+                else {
+                    document.getElementById('errorEmail').innerHTML = 
+                    "Campo válido";
+                }
+
+            }
+
+            else if(i==3)
+            {
+                var primero = document.getElementById('password').value;
+                var segundo = document.getElementById('confirmarpassword').value;
+
+                if(primero != segundo)
+                {
+                    document.getElementById('errorConfirmar').innerHTML = 
+                    "<span style='color:red'>Los password no coinciden</span>";
+                }
+                else{
+                    document.getElementById('errorConfirmar').innerHTML = 
+                    "Campo válido";
+                }
+            }
+
+            else{
+                document.getElementById(valorArreglo).innerHTML =  "Campo válido";
+            }
+
+
+            }
+            
+        }
+
+        function validarTodos(){
+            var contador = 0;
+            for(i=0; i<6; i++){
+                var valorArreglo = arreglo[i];
+                if(document.getElementById(valorArreglo).innerHTML=="Campo válido"){
+                    contador++;
+                }
+            }
+            if(contador==6){
+                document.getElementById("mensajefinal").innerHTML="Formulario validado!";
+            }
+        }
+
+        
+
+window.onload = function () {
+// Variables
+const IMAGENES = [
+    '1.jpg',
+    '2.jpg',
+    '3.jpg'
+];
+const TIEMPO_INTERVALO_MILESIMAS_SEG = 1000;
+let posicionActual = 0;
+let $botonRetroceder = document.querySelector('#retroceder');
+let $botonAvanzar = document.querySelector('#avanzar');
+let $imagen = document.querySelector('#imagen');
+let $botonPlay = document.querySelector('#play');
+let $botonStop = document.querySelector('#stop');
+let intervalo;
+
+// Funciones
+
+/**
+ * Funcion que cambia la foto en la siguiente posicion
+ */
+function pasarFoto() {
+    if(posicionActual >= IMAGENES.length - 1) {
+        posicionActual = 0;
+    } else {
+        posicionActual++;
+    }
+    renderizarImagen();
+}
+
+/**
+ * Funcion que cambia la foto en la anterior posicion
+ */
+function retrocederFoto() {
+    if(posicionActual <= 0) {
+        posicionActual = IMAGENES.length - 1;
+    } else {
+        posicionActual--;
+    }
+    renderizarImagen();
+}
+
+/**
+ * Funcion que actualiza la imagen de imagen dependiendo de posicionActual
+ */
+function renderizarImagen () {
+    $imagen.style.backgroundImage = `url(${IMAGENES[posicionActual]})`;
+}
+
+/**
+ * Activa el autoplay de la imagen
+ */
+function playIntervalo() {
+    intervalo = setInterval(pasarFoto, TIEMPO_INTERVALO_MILESIMAS_SEG);
+    // Desactivamos los botones de control
+    $botonAvanzar.setAttribute('disabled', true);
+    $botonRetroceder.setAttribute('disabled', true);
+    $botonPlay.setAttribute('disabled', true);
+    $botonStop.removeAttribute('disabled');
+
+}
+
+/**
+ * Para el autoplay de la imagen
+ */
+function stopIntervalo() {
+    clearInterval(intervalo);
+    // Activamos los botones de control
+    $botonAvanzar.removeAttribute('disabled');
+    $botonRetroceder.removeAttribute('disabled');
+    $botonPlay.removeAttribute('disabled');
+    $botonStop.setAttribute('disabled', true);
+}
+
+// Eventos
+$botonAvanzar.addEventListener('click', pasarFoto);
+$botonRetroceder.addEventListener('click', retrocederFoto);
+$botonPlay.addEventListener('click', playIntervalo);
+$botonStop.addEventListener('click', stopIntervalo);
+// Iniciar
+renderizarImagen();
+} 
+
+    </script>
+
+    <style>
+
+.carousel {
+max-width: 800px;
+margin: 0 auto;
+display: flex;
+}
+#imagen {
+width: 100%;
+height: 400px;
+background-size: cover;
+}
+
+.controles {
+margin: 10px auto;
+display: flex;
+}
+    </style>
+</head>
+<body>
+
+
+    <!-- Barra de navegación.-->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="container-fluid">
+              
+                <a class="navbar-brand" href="index.html">
+                    
+                    <img src="Air-Jordan-logo.png " alt="" width="50" height="50"></a>
+                    <h2 style="color: white">Jordano</h2>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Tooggle navigation">
+                    
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Registrar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./error.html">Informacion</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+      
+    </header>
+
+
+
+    
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="carousel">
+            <button id="retroceder">Retroceder</button>
+            <div id="imagen"></div>
+            <button id="avanzar">Avanzar</button>
+        </div>
+        <div class="controles justify-content-center">
+            <button id="play">Play</button>
+            <button id="stop"... disabled>Stop</button>
+        </div>
+    </div>
+</div><br><br><br>
+
+  <!--mi formulario-->
+  <div style="margin-top: 30px; margin-bottom: 30px;">
+    <h1 class="display " style="color: rgb(14, 10, 243); text-align: center;">Registro de usuario</h1>
+    <div class="container-fluid" style="width: 600px;">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nombre completo</label>
+                <input type="text" class="form-control" id="nombre" onkeyup="validar()"><div id="errorNombre"></div><br>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Correo</label>
+                <input type="text" class="form-control" id="email" onkeyup="validar()"><div id="errorEmail"></div><br>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Password</label>
+                <input type="text" class="form-control" id="password" onkeyup="validar()"><div id="errorPassword"></div><br>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Confirmar password</label>
+                <input type="text" class="form-control" id="confirmarpassword" onkeyup="validar()"><div id="errorConfirmar"></div><br>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-primary btn-lg" style=" margin-top: 10px;" value="Validar" onclick="validar(); validarTodos();">Registrarse</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<footer class="bg-dark text-center text-white">
+    <div class="container p-4 pb-0">
+        <section
+            class="mb-4">
+
+            <!-- Twitter -->
+            <a class="btn btn-outline-secondary btn-floating m-1" href="#!" role="button"><img src="twitter-logo-36.png" alt=""></i>
+        </a>
+
+        <!-- Instagram -->
+        <a class="btn btn-outline-secondary btn-floating m-1" href="#!" role="button"><img src="instagram-logo-36.png" alt=""></i>
+    </a>
+
+    <!-- Facebook -->
+    <a class="btn btn-outline-secondary btn-floating m-1" href="#!" role="button"><img src="facebook-logo-36.png" alt=""></i>
+</a>
+</body>
+</html></section></div><!-- Copyright --><div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">© 2020 Copyright:<a class="text-white" href="">GRUPO-3</a></div><!-- Copyright --></footer>
+
+
+
+
+
+
+</body>
+</html>
