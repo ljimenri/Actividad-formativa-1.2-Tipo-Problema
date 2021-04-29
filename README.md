@@ -1,2 +1,6 @@
 # Actividad-formativa-1.2-Tipo-Problema
-Actividad formativa 1.2 Tipo Problema javascript, bootstrap, validacion
+Raúl Farías
+Gerardo Gallardo
+Nicolás Araya
+Luis Jiménez
+
