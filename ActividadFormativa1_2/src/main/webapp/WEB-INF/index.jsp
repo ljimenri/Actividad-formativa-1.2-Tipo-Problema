@@ -19,33 +19,33 @@
 <body>
 
 <div class="container col-md-4">
-    <h3 style="text-align: center;">Ingreso de Productos</h3><br>
-    <form class="px-2">
+    <h3 style="text-align: center;">Registro</h3><br>
+    <form class="px-2" action="/submit" method="POST">
     
       <div class="form-group">
         <label>Nombre</label>
-        <input type="text" class="form-control" name="name">
-        <div style="color:red">{{alertaNombre}}</div>
+        <input type="text" class="form-control" name="name" value="${name}">
+        <div style="color:red">${alertaNombre}</div>
         <br>
       </div>
       
       <div class="form-group">
         <label>Apellido</label>
-        <input type="text" class="form-control" name="lastName">
-        <div style="color:red">{{alertaApellido}}</div>
+        <input type="text" class="form-control" name="lastName" value="${lastName}">
+        <div style="color:red">${alertaApellido}</div>
       </div><br>
   
   
       <div class="form-group">
         <label>Limite</label>
-        <input type="number" class="form-control" name="limit">
-        <div style="color:red">{{alertaLimite}}</div>
+        <input type="number" class="form-control" name="limit" value="${limit}">
+        <div style="color:red">${alertaLimite}</div>
       </div><br>
       
       <div class="form-group">
         <label>Código postal</label>
-        <input type="text" class="form-control" name="code">
-        <div style="color:red">{{alertaCodigo}}</div>
+        <input type="text" class="form-control" name="code" value="${code}">
+        <div style="color:red">${alertaCodigo}</div>
       </div><br>
    
   
