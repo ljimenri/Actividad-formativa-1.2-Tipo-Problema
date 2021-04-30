@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class IndexController {
 
 	@RequestMapping("/pagina2")
-	public String inicio(Model model) {
+	public String inicio(@RequestParam(value = "name") String name, @RequestParam(value = "lastName") String lastName,
+			@RequestParam(value = "limit") int limit, @RequestParam(value = "code") String code, Model model) {
 
+		model.addAttribute("name", name);
+		model.addAttribute("lastName", lastName);
+		model.addAttribute("limit", limit);
+		model.addAttribute("code", code);
 		return "pagina2.jsp";
 
 	}
@@ -35,6 +40,12 @@ public class IndexController {
 	@RequestMapping("/submit")
 	public String onSubmit(@RequestParam(value = "name") String name, @RequestParam(value = "lastName") String lastName,
 			@RequestParam(value = "limit") int limit, @RequestParam(value = "code") String code, Model model) {
+
+		System.out.println(name);
+		System.out.println(lastName);
+		System.out.println(code);
+		System.out.println(limit);
+
 		// asigno variables al modelo
 		model.addAttribute("name", name);
 		model.addAttribute("lastName", lastName);
@@ -52,14 +63,13 @@ public class IndexController {
 		}
 
 		// validar apellido
-		if (name.length() < 1 || name.length() > 10) {
+		if (lastName.length() < 1 || lastName.length() > 10) {
 			model.addAttribute("alertaApellido", "Debe tener entre 1 y 10 caracteres");
 			valid = false;
 		} else {
 			model.addAttribute("alertaApellido", "");
 		}
-		
-		// convertir de int a string
+
 
 		// validar limite
 		if (limit < 0 || limit > 999999) {
@@ -82,6 +92,6 @@ public class IndexController {
 		}
 
 		// return "inicio.jsp";
-		return "redirect:/pagina2";
+		return "redirect:/pagina2?name=" + name + "&lastName=" + lastName + "&code=" + code + "&limit=" + limit;
 	}
 }

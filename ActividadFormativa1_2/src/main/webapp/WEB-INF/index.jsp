@@ -24,27 +24,27 @@
     
       <div class="form-group">
         <label>Nombre</label>
-        <input type="text" class="form-control" name="name" value="${name}">
+        <input type="text" class="form-control" name="name" value="${name}" required>
         <div style="color:red">${alertaNombre}</div>
         <br>
       </div>
       
       <div class="form-group">
         <label>Apellido</label>
-        <input type="text" class="form-control" name="lastName" value="${lastName}">
+        <input type="text" class="form-control" name="lastName" value="${lastName}" required>
         <div style="color:red">${alertaApellido}</div>
       </div><br>
   
   
       <div class="form-group">
         <label>Limite</label>
-        <input type="number" class="form-control" name="limit" value="${limit}">
+        <input type="number" class="form-control" name="limit" value="${limit}" placeholder=0 required>
         <div style="color:red">${alertaLimite}</div>
       </div><br>
       
       <div class="form-group">
         <label>Código postal</label>
-        <input type="text" class="form-control" name="code" value="${code}">
+        <input type="text" class="form-control" name="code" value="${code}" required>
         <div style="color:red">${alertaCodigo}</div>
       </div><br>
    
