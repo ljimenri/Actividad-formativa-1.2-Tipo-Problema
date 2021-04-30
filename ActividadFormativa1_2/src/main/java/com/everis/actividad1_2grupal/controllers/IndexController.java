@@ -8,19 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
-	@RequestMapping("/pagina2")
-	public String inicio(@RequestParam(value = "name") String name, @RequestParam(value = "lastName") String lastName,
-			@RequestParam(value = "limit") int limit, @RequestParam(value = "code") String code, Model model) {
-
-		model.addAttribute("name", name);
-		model.addAttribute("lastName", lastName);
-		model.addAttribute("limit", limit);
-		model.addAttribute("code", code);
-		return "pagina2.jsp";
-
-	}
-
-	@RequestMapping("/form")
+	@RequestMapping("/")
 	public String formulario(Model model) {
 		// atributos form
 		model.addAttribute("name", "");
@@ -70,7 +58,6 @@ public class IndexController {
 			model.addAttribute("alertaApellido", "");
 		}
 
-
 		// validar limite
 		if (limit < 0 || limit > 999999) {
 			model.addAttribute("alertaLimite", "Debe ser positivo y menor a 6 digitos");
@@ -93,5 +80,22 @@ public class IndexController {
 
 		// return "inicio.jsp";
 		return "redirect:/pagina2?name=" + name + "&lastName=" + lastName + "&code=" + code + "&limit=" + limit;
+	}
+
+	@RequestMapping("/pagina2")
+	public String inicio(@RequestParam(value = "name") String name, @RequestParam(value = "lastName") String lastName,
+			@RequestParam(value = "limit") int limit, @RequestParam(value = "code") String code, Model model) {
+
+		model.addAttribute("name", name);
+		model.addAttribute("lastName", lastName);
+		model.addAttribute("limit", limit);
+		model.addAttribute("code", code);
+		return "pagina2.jsp";
+
+	}
+
+	@RequestMapping("/clean")
+	public String onClean() {
+		return "index.jsp";
 	}
 }
